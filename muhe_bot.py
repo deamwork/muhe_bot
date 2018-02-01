@@ -100,7 +100,10 @@ def get_cve_of_product(bot,update,vendor,product,count=20):
     cve_data = searchVendorProduct(vendor,product)
     update.message.reply_text("There {0} CVEs of {1}".format(len(cve_data),product))
     update.message.reply_text("Just show top {0}".format(count))
-    cve_data = cve_data[0:count]
+    if count < len(cve_data):
+        cve_data = cve_data[0:count]
+    else:
+        cve_data = cve_data[0:20]
     if cve_data:
         for cve in cve_data:
             msg = "CVE_ID : {0}\n" \
