@@ -82,6 +82,9 @@ def get_all_vendors(bot,update):
                 update.message.reply_text("--> {0}".format(vendor))
             else:
                 pass
+    else:
+        # format wrong
+        update.message.reply_text("Wrong cmd format...why not take look at help info?")
 
 
 def get_product_of_vendor(bot,update,vendor):
