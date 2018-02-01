@@ -6,7 +6,7 @@
 # Created Time: 2018-02-01 10:08:22
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import SearchCVE
+from SearchCVE import *
 import logging
 import json
 import os,re
@@ -65,23 +65,26 @@ def error(bot, update, error):
 
 def get_all_vendors(bot,update):
     vendors = SearchCVE.getAllVendors()
-    if update.message.text == "":
+    text = update.message.text.split()
+    if len(text) == 1:
         # return all vendors
         update.message.reply_text("Here are all vendors({0}):".format(len(vendors)))
         for idx in range(0,len(vendors),20):
             msg = "".join('--> ' + item + '\n' for item in vendors[idx:idx+20])
             # logger.debug(msg)
             update.message.reply_text(msg)
-    else:
-        # return vendors,name begin with user specificate
-        text = update.message.text.split()
+    elif len(text) == 2:
         split_char = text[1][0]
+        # return vendors,name begin with user specificate
         update.message.reply_text("Here all all vendors begin with `{0}`".format(split_char))
         for vendor in vendors:
             if vendor.startswith(split_char):
                 update.message.reply_text("--> {0}".format(vendor))
             else:
                 pass
+    else:
+        # format wrong
+        update.message.reply_text("Wrong cmd format...why not take look at help info?")
 
 
 def get_product_of_vendor(bot,update,vendor):
