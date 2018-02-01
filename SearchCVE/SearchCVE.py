@@ -1,5 +1,5 @@
 #!/usr/bin/python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 # File Name: SearchCVE.py
 # Author: o0xmuhe
 # Mail: o0xmuhe@gmail.com
@@ -11,6 +11,7 @@ import json
 BASE_URL = "http://cve.circl.lu/api"
 LASTEST_CVE_URL = "http://cve.circl.lu/api/last"
 
+
 def emptyJson():
     return json.loads("{}")
 
@@ -20,24 +21,24 @@ def getJSONData(url):
         r = requests.get(url)
         return json.loads(r.text)
     except requests.exceptions.HTTPError as errh:
-        print ("Http Error:",errh)
+        print ("Http Error:", errh)
         return emptyJson()
     except requests.exceptions.ConnectionError as errc:
-        print ("Error Connecting:",errc)
+        print ("Error Connecting:", errc)
         return emptyJson()
     except requests.exceptions.Timeout as errt:
-        print ("Timeout Error:",errt)
+        print ("Timeout Error:", errt)
         return emptyJson()
     except requests.exceptions.RequestException as err:
-        print ("OOps: Something Else",err)
+        print ("OOps: Something Else", err)
         return emptyJson()
 
 
 def getAllVendors():
-    '''
-        Get all vendors.
-        Return a vendors list.
-    '''
+    """
+    Get all vendors.
+    :return: vendors list.
+    """
     try:
         url = BASE_URL + '/browse'
         return getJSONData(url)['vendor']
@@ -47,10 +48,11 @@ def getAllVendors():
 
 
 def getProductsByVendor(target):
-    '''
-        Get target's vendor.
-        Return all products of vendor.
-    '''
+    """
+    Get target's vendor.
+    :param target: 
+    :return: all products of vendor
+    """
     try:
         url = BASE_URL + '/browse/{0}'.format(target)
         return getJSONData(url)['product']
@@ -60,29 +62,33 @@ def getProductsByVendor(target):
 
 
 def getLastCVEs():
-    '''
-        Get the last cve info.
-    '''
+    """
+    Get the last cve info.
+    :return: 
+    """
     url = LASTEST_CVE_URL
     return getJSONData(url)
 
 
-def searchVendorProduct(vendor,product):
-    '''
-        Get product info.
-        Return CVE data of this product with json format.
-    '''
-    url = BASE_URL + '/search/{0}/{1}'.format(vendor,product)
+def searchVendorProduct(vendor, product):
+    """
+    Get product info.
+    :param vendor: 
+    :param product: 
+    :return object: CVE data of this product JSON
+    """
+    url = BASE_URL + '/search/{0}/{1}'.format(vendor, product)
     return getJSONData(url)
 
 
 def searchCVEDetails(cve):
-    '''
-        Get CVE info by cve id.
-        format:
-                cve-xxxx-xxxx
-        Return CVE info with json data.
-    '''
+    """
+    Get CVE info by cve id.
+    format:
+            cve-xxxx-xxxx
+    :param cve: 
+    :return: CVE info with json data
+    """
     url = BASE_URL + '/cve/{0}'.format(cve)
     return getJSONData(url)
 
@@ -100,8 +106,6 @@ def main():
     # data = searchCVEDetails('cve-2010-3333')
     # print data
     pass
-
-
 
 if __name__ == '__main__':
     main()
