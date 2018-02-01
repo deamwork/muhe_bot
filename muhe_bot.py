@@ -6,7 +6,7 @@
 # Created Time: 2018-02-01 10:08:22
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-import SearchCVE
+from SearchCVE import *
 import logging
 import json
 import os,re
