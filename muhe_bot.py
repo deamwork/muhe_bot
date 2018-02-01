@@ -65,17 +65,17 @@ def error(bot, update, error):
 
 def get_all_vendors(bot,update):
     vendors = SearchCVE.getAllVendors()
-    if update.message.text == "":
+    text = update.message.text.split()
+    if len(text) == 1:
         # return all vendors
         update.message.reply_text("Here are all vendors({0}):".format(len(vendors)))
         for idx in range(0,len(vendors),20):
             msg = "".join('--> ' + item + '\n' for item in vendors[idx:idx+20])
             # logger.debug(msg)
             update.message.reply_text(msg)
-    else:
-        # return vendors,name begin with user specificate
-        text = update.message.text.split()
+    elif len(text) == 2:
         split_char = text[1][0]
+        # return vendors,name begin with user specificate
         update.message.reply_text("Here all all vendors begin with `{0}`".format(split_char))
         for vendor in vendors:
             if vendor.startswith(split_char):
