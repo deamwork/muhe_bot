@@ -8,21 +8,21 @@ muhe's tg bot
 在项目当前目录下，文件名`conf.json`，只有token的配置，格式如下：
 
 ```json
-{"Token":your_tg_bot_token}
+{"Token": "your_tg_bot_token"}
 ```
 
 
 #### 2. 支持的命令
 
-/vendors : get all vendors.
+`/vendors` get all vendors.
 
-/search [vendor] : get vendor's all product.
+`/search [vendor]` get vendor's all product.
 
-/search [vendor] [product] [count] : get all cve's about product of vendor.
+`/search [vendor] [product] [count]` get all cve's about product of vendor.
 
-/cves : get lastest cves.
+`/cves` get lastest cves.
 
-/cve [cve-xxxx-xxxx] : get info of cve-xxxx-xxxx.
+`/cve [cve-xxxx-xxxx]` get info of cve-xxxx-xxxx.
 
 
 #### TODO
