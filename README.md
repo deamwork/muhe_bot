@@ -8,7 +8,7 @@ muhe's tg bot
 在项目当前目录下，文件名`conf.json`，只有token的配置，格式如下：
 
 ```json
-{"Token":your_tg_bot_token}
+{"Token":"your_tg_bot_token"}
 ```
 
 
